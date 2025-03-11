@@ -1,0 +1,1026 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto&family=Open+Sans&family=Lora&family=Montserrat&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.app {
+  min-height: 200vh; /* Ensure scrollable height */
+  position: relative;
+  overflow: hidden; /* Ensure effects don't overflow */
+}
+
+.app.frozen {
+  border: 30px solid rgba(173, 216, 230, 0.4); /* Thicker light blue border with transparency */
+  box-shadow: 
+    inset 0 0 30px rgba(135, 206, 250, 0.7), /* Inner icy glow */
+    0 0 15px rgba(135, 206, 250, 0.5); /* Outer glow */
+  position: relative;
+  animation: frostPulse 5s infinite alternate; /* Subtle pulsing effect */
+}
+
+.app.frozen::before {
+  content: '';
+  position: fixed;
+  top: -30px;
+  left: -30px;
+  right: -30px;
+  bottom: -30px;
+  pointer-events: none;
+  z-index: 2; /* Above background but below particles and text */
+  border: 30px solid transparent;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(173, 216, 230, 0.5) 30%,
+    rgba(135, 206, 250, 0.7) 60%,
+    rgba(255, 255, 255, 0.2) 100%
+  ); /* Enhanced frosty gradient */
+  -webkit-backdrop-filter: blur(5px); /* Stronger frost effect */
+  backdrop-filter: blur(5px); /* Stronger frost effect */
+  animation: frostSpread 10s infinite ease-in-out; /* Animated frost spread */
+}
+
+.app.heat {
+  border: 30px solid rgba(255, 69, 0, 0.4); /* Fiery red-orange border with transparency */
+  box-shadow: 
+    inset 0 0 30px rgba(255, 165, 0, 0.7), /* Inner fiery glow */
+    0 0 15px rgba(255, 140, 0, 0.5); /* Outer glow */
+  position: relative;
+  animation: heatPulse 5s infinite alternate; /* Subtle pulsing effect */
+}
+
+.app.heat::before {
+  content: '';
+  position: fixed;
+  top: -30px;
+  left: -30px;
+  right: -30px;
+  bottom: -30px;
+  pointer-events: none;
+  z-index: 2; /* Above background but below particles and text */
+  border: 30px solid transparent;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 69, 0, 0.3) 30%,
+    rgba(255, 165, 0, 0.5) 60%,
+    rgba(255, 255, 255, 0.1) 100%
+  ); /* Fiery gradient */
+  -webkit-backdrop-filter: blur(3px); /* Hazy heat effect */
+  backdrop-filter: blur(3px); /* Hazy heat effect */
+  animation: heatWave 8s infinite ease-in-out; /* Animated heat wave */
+}
+
+/* Add this new mist effect class */
+.app.mist::before {
+  content: '';
+  position: fixed;
+  top: -30px;
+  left: -30px;
+  right: -30px;
+  bottom: -30px;
+  pointer-events: none;
+  z-index: 2;
+  border: 30px solid transparent;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(200, 200, 200, 0.3) 30%,
+    rgba(240, 240, 240, 0.4) 60%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  animation: mistFlow 15s infinite ease-in-out;
+}
+
+/* Enhance the pinkish colors to be more vivid */
+.app.pinkish {
+  border: 30px solid rgba(255, 20, 147, 0.5); /* More vivid hot pink border */
+  box-shadow: 
+    inset 0 0 30px rgba(255, 105, 180, 0.8), /* Brighter pink inner glow */
+    0 0 15px rgba(255, 0, 255, 0.6); /* Magenta outer glow */
+  position: relative;
+  animation: pinkPulse 5s infinite alternate;
+}
+
+.app.pinkish::before {
+  content: '';
+  position: fixed;
+  top: -30px;
+  left: -30px;
+  right: -30px;
+  bottom: -30px;
+  pointer-events: none;
+  z-index: 2;
+  border: 30px solid transparent;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 192, 203, 0.2) 0%,   /* Light pink */
+    rgba(255, 20, 147, 0.4) 30%,    /* Deep pink */
+    rgba(255, 0, 255, 0.5) 60%,     /* Magenta */
+    rgba(255, 105, 180, 0.2) 100%   /* Hot pink */
+  );
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  animation: pinkWave 8s infinite ease-in-out;
+}
+
+/* Updated pink animations for more vibrance */
+@keyframes pinkPulse {
+  0% {
+    box-shadow: inset 0 0 30px rgba(255, 105, 180, 0.8), 0 0 15px rgba(255, 0, 255, 0.6);
+  }
+  100% {
+    box-shadow: inset 0 0 45px rgba(255, 20, 147, 1), 0 0 25px rgba(255, 0, 255, 0.8);
+  }
+}
+
+@keyframes pinkWave {
+  0% {
+    opacity: 0.6;
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.03) rotate(1deg);
+  }
+  100% {
+    opacity: 0.6;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* Add mist flow animation */
+@keyframes mistFlow {
+  0% {
+    opacity: 0.5;
+    transform: translateX(-5px) translateY(0px) scale(1);
+  }
+  25% {
+    opacity: 0.7;
+    transform: translateX(5px) translateY(-5px) scale(1.02);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translateX(10px) translateY(0px) scale(1.01);
+  }
+  75% {
+    opacity: 0.8;
+    transform: translateX(0px) translateY(5px) scale(1.03);
+  }
+  100% {
+    opacity: 0.5;
+    transform: translateX(-5px) translateY(0px) scale(1);
+  }
+}
+
+/* Add mist particles */
+.particle.mist {
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 70%);
+  border-radius: 50%;
+  top: var(--random-top, 0);
+  left: var(--random-left, 0);
+  animation: float-mist var(--random-duration, 20s) linear infinite;
+  animation-delay: var(--random-delay, 0s);
+  opacity: 0.4;
+}
+
+@keyframes float-mist {
+  0% {
+    transform: translateY(0) translateX(0) scale(0.8);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.4;
+  }
+  80% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-50vh) translateX(var(--random-wind, 30px)) scale(1.2);
+    opacity: 0;
+  }
+}
+
+.image-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+}
+
+.background-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.71); /* Original overlay */
+  z-index: 2;
+}
+
+.color-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+  transition: background-color 0.3s ease; /* Smooth color transition */
+}
+
+.text-container {
+  position: relative;
+  z-index: 3;
+  min-height: 100vh;
+  min-width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 70px;
+  text-align: justify; /* ePub-like text alignment */
+  max-width: 800px; /* Readable width like an ePub */
+  margin: 0 auto; /* Center the container */
+}
+
+.paragraph {
+  margin: 20px 0; /* Spacing between paragraphs */
+}
+
+.line {
+  display: block; /* Each line takes its own row */
+  font-size: 1.7rem;
+  font-weight: 400;
+  opacity: 0.8;
+  transition: opacity 0.5s ease, text-shadow 0.5s ease;
+  line-height: 1.6; /* Comfortable line spacing */
+}
+
+.line.illuminate {
+  opacity: 1;
+  text-shadow: 0 0 2px rgba(255, 255, 255, 0.2), 0 0 4px rgba(255, 255, 255, 0.1), 0 0 6px rgba(255, 255, 255, 0.05); /* Very faint glow */
+}
+
+/* Menu Styles */
+.menu-container {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 4;
+}
+
+.menu-toggle {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+}
+
+.menu-toggle:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.controls {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 15px; /* Increased padding for better spacing */
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Increased gap for better readability */
+  align-items: flex-start;
+  max-height: 0;
+  overflow-y: auto; /* Enable scrolling if content overflows */
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+
+.controls.open {
+  max-height: 500px; /* Increased max-height to accommodate all items */
+  opacity: 1;
+}
+
+.controls.closed {
+  max-height: 0;
+  opacity: 0;
+}
+
+.controls label {
+  color: white;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem; /* Slightly larger for readability */
+}
+
+/* Style the select elements and buttons within controls for consistency */
+.controls select,
+.controls button {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 5px;
+  border-radius: 3px;
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.controls select:hover,
+.controls button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Style the color input to match */
+.controls input[type="color"] {
+  width: 50px;
+  height: 30px;
+  border: none;
+  cursor: pointer;
+}
+
+.controls.open {
+  max-height: 300px; /* Adjust based on content height */
+  opacity: 1;
+}
+
+.controls.closed {
+  max-height: 0;
+  opacity: 0;
+}
+
+.controls label {
+  color: white;
+  font-family: 'Playfair Display', serif;
+}
+
+/* Translate Button */
+.translate-button {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 4;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+}
+
+.translate-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Particle Effect */
+.particle-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  pointer-events: none; /* Ensures particles don't interfere with interactions */
+  z-index: 3; /* Above background but below text/controls */
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  opacity: 0.8;
+  animation-play-state: running; /* Ensure animation starts */
+}
+
+/* Snow Particle */
+.particle.snow {
+  width: 4px;
+  height: 4px;
+  background: rgba(169, 169, 169, 0.8); /* Grayish snow */
+  border-radius: 50%;
+  top: var(--random-top, 0);
+  left: var(--random-left, 0);
+  animation: fall var(--random-duration, 10s) linear infinite;
+  animation-delay: var(--random-delay, 0s);
+}
+
+.particle.snow.wind {
+  animation: fall-with-wind var(--random-duration, 10s) linear infinite;
+  animation-delay: var(--random-delay, 0s);
+}
+
+/* Leaf Particle */
+.particle.leaf {
+  width: 12px;
+  height: 6px;
+  background: rgba(139, 69, 19, 0.8); /* Brownish leaf color */
+  clip-path: polygon(50% 0%, 100% 25%, 75% 100%, 25% 100%, 0% 25%); /* Pointed leaf shape */
+  transform: rotate(45deg); /* Diagonal for a leaf-like shape */
+  top: var(--random-top, 0);
+  left: var(--random-left, 0);
+  animation: fall-leaf var(--random-duration, 10s) linear infinite;
+  animation-delay: var(--random-delay, 0s);
+}
+
+.particle.leaf.wind {
+  animation: fall-leaf-with-wind var(--random-duration, 10s) linear infinite;
+  animation-delay: var(--random-delay, 0s);
+}
+
+/* Snow Animations */
+@keyframes fall {
+  0% {
+    opacity: 0;
+    transform: translateY(-100vh);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+    transform: translateY(100vh);
+  }
+}
+
+@keyframes fall-with-wind {
+  0% {
+    opacity: 0;
+    transform: translateY(-100vh) translateX(0);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(-60vh) translateX(calc(var(--random-wind) * 0.3));
+  }
+  50% {
+    transform: translateY(0vh) translateX(calc(var(--random-wind) * 0.7));
+  }
+  80% {
+    transform: translateY(60vh) translateX(calc(var(--random-wind) * 0.4));
+  }
+  100% {
+    opacity: 0.5;
+    transform: translateY(100vh) translateX(var(--random-wind));
+  }
+}
+
+/* Leaf Animations */
+@keyframes fall-leaf {
+  0% {
+    opacity: 0;
+    transform: translateY(-100vh) rotate(45deg) translateX(0);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(-60vh) rotate(30deg) translateX(-2vw);
+  }
+  50% {
+    transform: translateY(0vh) rotate(60deg) translateX(2vw);
+  }
+  80% {
+    transform: translateY(60vh) rotate(45deg) translateX(-1vw);
+  }
+  100% {
+    opacity: 0.5;
+    transform: translateY(100vh) rotate(45deg) translateX(0);
+  }
+}
+
+@keyframes fall-leaf-with-wind {
+  0% {
+    opacity: 0;
+    transform: translateY(-100vh) rotate(45deg) translateX(0);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(-60vh) rotate(30deg) translateX(calc(var(--random-wind) * 0.3));
+  }
+  50% {
+    transform: translateY(0vh) rotate(60deg) translateX(calc(var(--random-wind) * 0.7));
+  }
+  80% {
+    transform: translateY(60vh) rotate(45deg) translateX(calc(var(--random-wind) * 0.4));
+  }
+  100% {
+    opacity: 0.5;
+    transform: translateY(100vh) rotate(45deg) translateX(var(--random-wind));
+  }
+}
+
+/* Frost Animations */
+@keyframes frostPulse {
+  0% {
+    box-shadow: inset 0 0 30px rgba(135, 206, 250, 0.7), 0 0 15px rgba(135, 206, 250, 0.5);
+  }
+  100% {
+    box-shadow: inset 0 0 40px rgba(135, 206, 250, 0.9), 0 0 20px rgba(135, 206, 250, 0.7);
+  }
+}
+
+@keyframes frostSpread {
+  0% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+}
+
+/* Heat Animations */
+@keyframes heatPulse {
+  0% {
+    box-shadow: inset 0 0 30px rgba(255, 165, 0, 0.7), 0 0 15px rgba(255, 140, 0, 0.5);
+  }
+  100% {
+    box-shadow: inset 0 0 40px rgba(255, 69, 0, 0.9), 0 0 20px rgba(255, 140, 0, 0.7);
+  }
+}
+
+@keyframes heatWave {
+  0% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.03);
+  }
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+}
+
+/* Pinkish Animations */
+@keyframes pinkPulse {
+  0% {
+    box-shadow: inset 0 0 30px rgba(255, 182, 193, 0.7), 0 0 15px rgba(255, 192, 203, 0.5);
+  }
+  100% {
+    box-shadow: inset 0 0 40px rgba(255, 105, 180, 0.9), 0 0 20px rgba(255, 192, 203, 0.7);
+  }
+}
+
+@keyframes pinkWave {
+  0% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.03);
+  }
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+}
+
+/* Add this to your existing App.css */
+
+/* Next Page Button */
+/* Pagination Buttons Container */
+.pagination-buttons {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* Space between buttons */
+  margin-top: 30px; /* Space above the buttons */
+  padding-bottom: 20px; /* Space below the buttons */
+}
+
+/* Previous Page Button */
+.prev-page-button {
+  position: relative;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  transition: background 0.3s ease;
+  z-index: 4;
+}
+
+.prev-page-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Next Page Button */
+.next-page-button {
+  position: relative;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  transition: background 0.3s ease;
+  z-index: 4;
+}
+
+.next-page-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.visual-novel-box {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  padding: 15px 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 600px;
+  text-align: center;
+  z-index: 5;
+}
+
+/* Visual Novel Text */
+.visual-novel-text {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+/* Visual Novel Buttons Container */
+.visual-novel-buttons {
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+/* Go Back Button */
+.go-back-button {
+  background: #ff4444; /* Red color to hint it’s a trick */
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+}
+
+.go-back-button:hover {
+  background: #cc0000; /* Darker red on hover */
+}
+
+/* Next Line Button */
+.next-line-button {
+  background: #4CAF50; /* Green color for next */
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+}
+
+.next-line-button:hover {
+  background: #45a049; /* Darker green on hover */
+}
+.visual-novel-box:hover {
+  background: rgba(0, 0, 0, 0.8); /* Slightly less transparent on hover */
+}
+
+.visual-novel-text {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* Add these to your existing App.css */
+
+/* Base animation class */
+.text-container {
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+}
+
+/* Fade Animation */
+.animate-fade {
+  animation-name: fade;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Slide Left Animation */
+.animate-slide-left {
+  animation-name: slideLeft;
+}
+
+@keyframes slideLeft {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Slide Right Animation */
+.animate-slide-right {
+  animation-name: slideRight;
+}
+
+@keyframes slideRight {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Zoom Animation */
+.animate-zoom {
+  animation-name: zoom;
+}
+
+@keyframes zoom {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* GIF Transition */
+/* GIF Transition */
+.gif-transition {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 6; /* Above everything else */
+  width: 300px; /* Container width */
+  height: 300px; /* Container height */
+  animation: gifFade 1s ease-in-out forwards; /* Animation for the GIF */
+}
+
+/* GIF Image */
+.gif-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2; /* Above the glass fragments */
+  clip-path: polygon(
+    10% 5%, 20% 0%, 40% 5%, 60% 0%, 80% 5%, 90% 10%,
+    95% 20%, 100% 40%, 95% 60%, 100% 80%, 90% 90%,
+    80% 95%, 60% 100%, 40% 95%, 20% 100%, 10% 90%,
+    5% 80%, 0% 60%, 5% 40%, 0% 20%, 10% 10%
+  ); /* Jagged edges around the GIF */
+}
+
+/* Outer Glass Fragments (Primary Layer) */
+.gif-transition::before {
+  content: '';
+  position: absolute;
+  top: -30px; /* Extend further for larger fragments */
+  left: -30px;
+  right: -30px;
+  bottom: -30px;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 191, 255, 0.4), /* Light cyan for glass effect */
+    rgba(0, 0, 255, 0.2)    /* Darker blue at the edges */
+  );
+  z-index: 1; /* Behind the GIF */
+  clip-path: polygon(
+    /* Top left fragment */
+    0% 0%, 20% 0%, 30% 15%, 10% 25%, 0% 10%,
+    /* Top center fragment */
+    40% 0%, 50% 10%, 60% 0%,
+    /* Top right fragment */
+    80% 0%, 100% 0%, 90% 20%, 80% 10%,
+    /* Right center fragment */
+    100% 40%, 90% 50%, 100% 60%,
+    /* Bottom right fragment */
+    100% 80%, 90% 100%, 80% 90%, 70% 100%,
+    /* Bottom center fragment */
+    60% 100%, 50% 90%, 40% 100%,
+    /* Bottom left fragment */
+    20% 100%, 10% 90%, 0% 80%, 10% 70%,
+    /* Left center fragment */
+    0% 60%, 10% 50%, 0% 40%
+  );
+  filter: blur(2px); /* Slight blur for glass-like effect */
+  box-shadow: 0 0 10px rgba(0, 191, 255, 0.3); /* Glow effect */
+}
+
+/* Inner Glass Fragments (Secondary Layer) */
+.gif-transition::after {
+  content: '';
+  position: absolute;
+  top: -20px; /* Smaller fragments closer to the GIF */
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  background: linear-gradient(
+    45deg,
+    rgba(135, 206, 250, 0.3), /* Light sky blue */
+    rgba(0, 0, 255, 0.1)       /* Faint blue tint */
+  );
+  z-index: 1; /* Behind the GIF, above ::before */
+  clip-path: polygon(
+    /* Top left fragment */
+    15% 5%, 25% 0%, 35% 10%, 20% 20%,
+    /* Top right fragment */
+    65% 0%, 75% 10%, 85% 0%, 95% 15%,
+    /* Bottom right fragment */
+    95% 85%, 85% 100%, 75% 90%, 65% 95%,
+    /* Bottom left fragment */
+    35% 100%, 25% 90%, 15% 95%, 5% 85%,
+    /* Center fragments for complexity */
+    40% 40%, 50% 30%, 60% 40%, 50% 50%, 40% 60%
+  );
+  filter: blur(1px); /* Subtle blur for inner fragments */
+  box-shadow: 0 0 5px rgba(135, 206, 250, 0.2); /* Subtle glow */
+}
+
+/* GIF Animation */
+@keyframes gifFade {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  80% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+}
+
+/* Opening Container */
+.opening-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10; /* Above everything else */
+  background: #000; /* Fallback background color */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px; /* Space for the shadowy border */
+  box-sizing: border-box;
+}
+
+/* Opening GIF */
+.opening-gif {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure the GIF covers the container */
+  border: 10px solid #000; /* Black border */
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.8); /* Shadowy effect */
+}
+
+/* Skip Button */
+.skip-button {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  transition: background 0.3s ease;
+  z-index: 11; /* Above the GIF */
+}
+
+.skip-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Existing CSS remains unchanged unless specified */
+
+/* Visual Novel Box */
+.visual-novel-box {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  padding: 15px 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 600px;
+  text-align: center;
+  z-index: 5;
+}
+
+/* Visual Novel Text */
+.visual-novel-text {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+/* Visual Novel Buttons Container */
+.visual-novel-buttons {
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+/* Go Back Button */
+.go-back-button {
+  background: #ff4444;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+}
+
+.go-back-button:hover {
+  background: #cc0000;
+}
+
+/* Next Line Button */
+.next-line-button {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+}
+
+.next-line-button:hover {
+  background: #45a049;
+}
+
+/* Rest of the CSS remains unchanged */
