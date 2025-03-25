@@ -228,8 +228,10 @@
   top: 0;
   left: 0;
   width: 100%;
+  background-color: rgba(70, 15, 15, 0.9); 
   height: 100%;
-  background: rgba(0, 0, 0, 0.71); /* Original overlay */
+  /*background: rgba(90, 30, 30, 0.84); /* Original overlay */
+  /* background: rgba(80, 20, 20, 0.85);  */
   z-index: 2;
 }
 
@@ -240,6 +242,7 @@
   width: 100%;
   height: 100vh;
   z-index: 1;
+  padding: 30px;
   transition: background-color 0.3s ease; /* Smooth color transition */
 }
 
@@ -252,7 +255,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 70px;
+  padding: 30px;
   text-align: justify; /* ePub-like text alignment */
   max-width: 800px; /* Readable width like an ePub */
   margin: 0 auto; /* Center the container */
@@ -264,11 +267,22 @@
 
 .line {
   display: block; /* Each line takes its own row */
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   font-weight: 400;
-  opacity: 0.8;
+  color: white;
+  opacity: 1;
   transition: opacity 0.5s ease, text-shadow 0.5s ease;
   line-height: 1.6; /* Comfortable line spacing */
+  /* Subtle border effect with reduced opacity, smaller offset, and slight blur */
+  text-shadow: 
+  -0.5px -0.5px 1px rgba(0, 0, 0, 0.6),  
+   0.5px -0.5px 1px rgba(0, 0, 0, 0.6),  
+  -0.5px  0.5px 1px rgba(0, 0, 0, 0.6),  
+   0.5px  0.5px 1px rgba(0, 0, 0, 0.6),
+  -0.5px   0px 1px rgba(0, 0, 0, 0.6),  
+   0.5px   0px 1px rgba(0, 0, 0, 0.6),  
+    0px  -0.5px 1px rgba(0, 0, 0, 0.6),  
+    0px   0.5px 1px rgba(0, 0, 0, 0.6);
 }
 
 .line.illuminate {
